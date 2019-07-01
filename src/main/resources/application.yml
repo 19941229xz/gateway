@@ -1,0 +1,16 @@
+
+eureka:
+  client:
+    serviceUrl: #注册中心的注册地址  一定要指向我们的eureka-server服务
+      defaultZone: http://127.0.0.1:9080/eureka/,http://127.0.0.1:8090/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+  application:
+    name: gateway
+server:
+  port: 1314
