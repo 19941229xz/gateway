@@ -14,3 +14,6 @@ spring:
     name: gateway
 server:
   port: 1314
+feign:
+  hystrix:
+    enabled: true
