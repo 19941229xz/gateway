@@ -36,13 +36,14 @@ public class JwtUtil {
     }
 
     //签名方法
-    public static String sign(String username,String secret){
+    public static String sign(int userId,String username,String secret){
         //过期时间
         Date date = new Date(System.currentTimeMillis()+expire_time);
 
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
         return JWT.create().withClaim("username",username)
+                .withClaim("userId",userId)
                 .withExpiresAt(date).sign(algorithm);
 
 
@@ -59,7 +60,15 @@ public class JwtUtil {
             return null;
         }
 
+    }
 
+    public static int  getUserId(String token){
+        try {
+            DecodedJWT jwt = JWT.decode(token);
+            return jwt.getClaim("userId").asInt();
+        }catch (Exception e){
+            return 0;
+        }
 
     }
 
